@@ -24,14 +24,12 @@ class AdultIncomeML:
         self.performance_table = pd.DataFrame(columns=['Etapa', 'Modelo', 'F1_Treino', 'F1_Validacao', 'F1_Teste', 'Melhoria'])
     
     def load_data(self):
-        """Carregar dados para treinamento"""
         print("📂 Carregando dados para treinamento...")
-        self.train_df = pd.read_csv('C:projeto_completo/dataset/train.csv')
-        self.validation_df = pd.read_csv('C:projeto_completo/dataset/validation.csv')
-        self.test_df = pd.read_csv('C:projeto_completo/dataset/test.csv')
+        self.train_df = pd.read_csv('C:dataset/train.csv')
+        self.validation_df = pd.read_csv('C:dataset/validation.csv')
+        self.test_df = pd.read_csv('C:dataset/test.csv')
         print("✅ Dados carregados!")
     def preprocess_data(self):
-        """Pré-processar dados para ML"""
         print("🔧 Pré-processando dados...")
         
         # Separar features e target
@@ -81,7 +79,7 @@ class AdultIncomeML:
         return X_train_selected, y_train, X_val_selected, y_val, X_test_selected, y_test
     
     def evaluate_model(self, model, X_train, y_train, X_val, y_val, X_test, y_test, etapa, modelo_nome):
-        """Avaliar modelo e adicionar à tabela de performance"""
+        
         model.fit(X_train, y_train)
         
         # Previsões
@@ -122,7 +120,7 @@ class AdultIncomeML:
         return f1_test
     
     def plot_performance_evolution(self):
-        """Plotar gráfico de evolução da performance"""
+    
         plt.figure(figsize=(12, 8))
         
         # Gráfico de linhas
@@ -138,7 +136,7 @@ class AdultIncomeML:
         plt.legend()
         plt.grid(True, alpha=0.3)
         plt.tight_layout()
-        plt.savefig('C:projeto_completo/results/performance_evolution.png', dpi=300, bbox_inches='tight')
+        plt.savefig('C:results/performance_evolution.png', dpi=300, bbox_inches='tight')
         plt.show()
         
         # Mostrar tabela
@@ -147,18 +145,18 @@ class AdultIncomeML:
         print(self.performance_table.round(4))
     
     def run_complete_ml_pipeline(self):
-        """Executar pipeline completo com múltiplos modelos"""
+        
         print("🎯 INICIANDO PROJETO COMPLETO DE MACHINE LEARNING")
         print("="*70)
         
         try:
-            # 1. Carregar dados
+            
             self.load_data()
             
-            # 2. Pré-processar
+            
             X_train, y_train, X_val, y_val, X_test, y_test = self.preprocess_data()
             
-            # 3. Diferentes modelos e técnicas
+            
             modelos = [
                 {
                     'model': RandomForestClassifier(random_state=42, n_jobs=-1),
@@ -195,14 +193,14 @@ class AdultIncomeML:
                 }
             ]
             
-            # 4. Treinar e avaliar cada modelo
+            
             for config in modelos:
                 self.evaluate_model(
                     config['model'], X_train, y_train, X_val, y_val, X_test, y_test,
                     config['etapa'], config['nome']
                 )
             
-            # 5. Ensemble dos melhores modelos
+            
             from sklearn.ensemble import VotingClassifier
             best_rf = RandomForestClassifier(
                 random_state=42, n_jobs=-1, class_weight='balanced',
@@ -220,10 +218,9 @@ class AdultIncomeML:
                 'Ensemble', 'Voting (RF + XGB)'
             )
             
-            # 6. Plotar evolução
+
             self.plot_performance_evolution()
             
-            # 7. Salvar melhor modelo
             self.model = ensemble  # Salvar o ensemble como melhor modelo
             self.save_models()
             
@@ -235,17 +232,16 @@ class AdultIncomeML:
             traceback.print_exc()
     
     def save_models(self):
-        """Salvar modelos treinados"""
         import os
-        os.makedirs('C:projeto_completo/models', exist_ok=True)
-        os.makedirs('C:projeto_completo/results', exist_ok=True)
+        os.makedirs('C:models', exist_ok=True)
+        os.makedirs('C:results', exist_ok=True)
         
-        joblib.dump(self.model, 'C:projeto_completo/models/best_model.pkl')
-        joblib.dump(self.preprocessor, 'C:projeto_completo/models/preprocessor.pkl')
-        joblib.dump(self.selector, 'C:projeto_completo/models/feature_selector.pkl')
+        joblib.dump(self.model, 'C:models/best_model.pkl')
+        joblib.dump(self.preprocessor, 'C:models/preprocessor.pkl')
+        joblib.dump(self.selector, 'C:models/feature_selector.pkl')
         
         # Salvar tabela de performance
-        self.performance_table.to_csv('C:projeto_completo/results/performance_table.csv', index=False)
+        self.performance_table.to_csv('C:results/performance_table.csv', index=False)
         
         print("💾 Modelos e resultados salvos!")
 

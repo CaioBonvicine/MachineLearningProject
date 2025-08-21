@@ -23,9 +23,9 @@ class DataAnalyzer:
         print("📂 Carregando e analisando estrutura dos dados...")
         
         try:
-            self.train_df = pd.read_csv('C:projeto_completo/dataset/train.csv')
-            self.validation_df = pd.read_csv('C:projeto_completo/dataset/validation.csv')
-            self.test_df = pd.read_csv('C:projeto_completo/dataset/test.csv')
+            self.train_df = pd.read_csv('C:dataset/train.csv')
+            self.validation_df = pd.read_csv('C:dataset/validation.csv')
+            self.test_df = pd.read_csv('C:dataset/test.csv')
             
             self.actual_columns = self.train_df.columns.tolist()
             
@@ -161,7 +161,7 @@ class DataAnalyzer:
                     axes[i].set_ylabel('Frequência')
             
             plt.tight_layout()
-            plt.savefig('C:projeto_completo/results/numeric_distributions.png', dpi=300, bbox_inches='tight')
+            plt.savefig('C:results/numeric_distributions.png', dpi=300, bbox_inches='tight')
             plt.show()
         
 
@@ -173,7 +173,7 @@ class DataAnalyzer:
             plt.ylabel('Quantidade')
             plt.xticks(rotation=0)
             plt.tight_layout()
-            plt.savefig('C:projeto_completo/results/target_distribution.png', dpi=300, bbox_inches='tight')
+            plt.savefig('C:results/target_distribution.png', dpi=300, bbox_inches='tight')
             plt.show()
     
     def analyze_target_relationship(self):
