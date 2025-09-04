@@ -1,28 +1,32 @@
-Projeto de Machine Learning - Classificação de Renda
+# Projeto de Machine Learning - Classificação de Renda
 
-Este projeto implementa um pipeline completo de **Machine Learning** para classificação de renda com base em variáveis socioeconômicas.  
-Ele abrange desde a **exploração de dados**, **pré-processamento**, **treinamento de modelos**, até a **avaliação de desempenho**.
+Este projeto implementa um pipeline completo de **Machine Learning** para **classificação de renda** com base em variáveis socioeconômicas.  
+O fluxo abrange desde a exploração de dados, pré-processamento, treinamento de modelos até a avaliação de desempenho.
 
+## 🚀 Como usar
 
-Como usar:
+### 1. Ajustar caminhos (se necessário)
+Dependendo do ambiente em que o projeto for executado, pode ser necessário ajustar os caminhos das pastas dentro dos scripts:  
+- `AnaliseDeDataSet.py`  
+- `MachineLearningMain.py`
 
-1- Dependendo do ambiente em que o projeto for executado, pode ser necessário ajustar os caminhos das pastas dentro dos scripts (AnaliseDeDataSet.py e MachineLearningMain.py).
+### 2. Criar ambiente virtual (recomendado)
 
-2- Criar ambiente virtual e executar os comandos (recomendado):
-
+```bash
+# Criar ambiente virtual
 python -m venv venv
-source venv/bin/activate   # para Linux/macOS
-venv\Scripts\activate      # para Windows
 
-3-Instalar dependências:
+# Ativar no Linux/macOS
+source venv/bin/activate
 
+# Ativar no Windows
+venv\Scripts\activate
+
+# Instalar Dependências
 pip install -r requirements.txt
 
-4-Executar a análise exploratória:
-
+# Executar a análise exploratória
 python AnaliseDeDataSet.py
 
-5- Treinar e avaliar o modelo:
-
+# Treinar e avaliar o modelo
 python MachineLearningMain.py
-
